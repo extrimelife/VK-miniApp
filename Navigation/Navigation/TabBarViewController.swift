@@ -23,12 +23,12 @@ class TabBarViewController: UITabBarController {
         let feedController = UINavigationController(rootViewController: feedViewController)
         feedViewController.tabBarItem.title = "Лента"
         feedViewController.tabBarItem.image = UIImage(systemName: "play.circle")
-        feedViewController.navigationItem.title = "FeedView"
+        feedViewController.navigationItem.title = "Feed"
         
         let profileController = UINavigationController(rootViewController: profileViewController)
         profileViewController.tabBarItem.title = "Профиль"
         profileViewController.tabBarItem.image = UIImage(systemName: "person.crop.circle")
-        profileViewController.navigationItem.title = "ProfileView"
+        profileViewController.navigationItem.title = "Profile"
         viewControllers = [feedController, profileController]
     }
     
