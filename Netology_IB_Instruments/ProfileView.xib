@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ProfileView" customModule="Netology_IB_Instruments" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="508" height="810"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bnzuu0EKpq0" translatesAutoresizingMaskIntoConstraints="NO" id="dUx-me-o2I">
+                    <rect key="frame" x="12" y="0.0" width="161" height="237"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Хильченко Роман" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8HR-z0-yEy">
+                    <rect key="frame" x="181" y="10" width="318" height="42"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" systemColor="systemRedColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <color key="highlightedColor" systemColor="labelColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20.02.1991" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQQ-oi-2v9">
+                    <rect key="frame" x="181" y="60" width="318" height="40"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" systemColor="systemRedColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Алушта" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEO-lK-SdL">
+                    <rect key="frame" x="181" y="108" width="318" height="45"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" systemColor="systemRedColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ZDa-J4-ely">
+                    <rect key="frame" x="11" y="233" width="487" height="557"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" systemColor="systemRedColor"/>
+                    <string key="text">СПЕЦИАЛИЗАЦИИ: Торговый представитель Занятость: полная занятость График работы: удаленная работа, гибкий график, полный день Опыт работы 4 года 9 месяцев Редактировать Июнь 2012 — февраль 2017 4 года 9 месяцев ТФ Рада,Крымская сырная компания,SNS grope,Торговый Дом "Старый Амстердам"
+
+Республика Крым
+
+Розничная торговля
+
+Розничная сеть (продуктовая)
+
+Несетевая розница, мелкий опт
+
+Розничная сеть (drogerie, товары повседневного спроса)
+
+Продукты питания
+
+Безалкогольные напитки (продвижение, оптовая торговля) дожность: Торговый агент Посещал торговые точки на закрепленной и периферийной территории.Легко и не принужденно нахожу общий язык с новыми людьми.Привлекаю новых клиентов.Заключаю сделки,заключаю договора.Собираю дебиторскую задолженность,виду анализ и администрацию по заключению сделки и.т.д .Несколько раз был лучшим торговым агентом по региону.
+
+КЛЮЧЕВЫЕ НАВЫКИ:
+
+Редактировать
+Мерчендайзинг
+Традиционная розница
+работа с текущей базой клиентов
+Пользователь ПК
+Ведение клиентской базы
+Проведение промо акций
+Работа с дебиторской задолженностью
+Водительское удостоверение категории B
+MS Internet
+Обо мне:
+
+Люблю активный образ жизни,занимаюсь сноубордом и плаванием,играю на гитаре,увлекаюсь языком программирования SWIFT.</string>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cityLabel" destination="QEO-lK-SdL" id="4aQ-n3-Xpd"/>
+                <outlet property="dataLabel" destination="mQQ-oi-2v9" id="rzq-j0-rFy"/>
+                <outlet property="imageView" destination="dUx-me-o2I" id="NxJ-xY-XbC"/>
+                <outlet property="nameLabel" destination="8HR-z0-yEy" id="F5s-82-FhN"/>
+                <outlet property="textView" destination="ZDa-J4-ely" id="A4z-nF-5HY"/>
+            </connections>
+            <point key="canvasLocation" x="-10.144927536231885" y="28.532608695652176"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bnzuu0EKpq0" width="960" height="1280"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
