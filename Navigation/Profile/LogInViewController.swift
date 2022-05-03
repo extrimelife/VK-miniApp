@@ -18,7 +18,7 @@ class LogInViewController: UIViewController {
         setupLayout()
         logTextField.delegate = self
         pasTextField.delegate = self
-        
+    
     }
     
     private let imageView: UIImageView = {
@@ -52,7 +52,6 @@ class LogInViewController: UIViewController {
         textFieldLog.textColor = .black
         textFieldLog.font = .systemFont(ofSize: 16)
         textFieldLog.tintColor = .lightGray
-        textFieldLog.autocapitalizationType = .none
         return textFieldLog
     }()
     
@@ -96,6 +95,7 @@ class LogInViewController: UIViewController {
         return scrollView
     }()
     
+    //Дополнительная view для scroll view(без него scroll работать не будет)
     private let contentView: UIView = {
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -177,9 +177,14 @@ class LogInViewController: UIViewController {
     
 }
 
+//Расширение для закрытия клавиатуры
 extension LogInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
     }
+    
 }
+
+
+

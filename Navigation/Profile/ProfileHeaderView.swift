@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
+    
     private var statusText: String?
     
     override init(frame: CGRect) {
@@ -127,9 +128,9 @@ class ProfileHeaderView: UIView {
             textField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 27),
             textField.leadingAnchor.constraint(equalTo: label.leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: label.trailingAnchor),
-            textField.heightAnchor.constraint(equalToConstant: 40)
+            textField.heightAnchor.constraint(equalToConstant: 40),
         ])
-        
     }
     
 }
+

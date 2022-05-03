@@ -16,7 +16,7 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpController()
-        
+        setupNavigationController()
     }
     
     private func setUpController() {
@@ -33,6 +33,16 @@ class TabBarViewController: UITabBarController {
         logInViewController.navigationItem.title = "Profile"
         
         viewControllers = [feedController, profileController]
+    }
+    
+    private func setupNavigationController() {
+        let navigationBar = UINavigationBarAppearance()
+        navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.standardAppearance =  navigationBar
+        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBar
+        view.backgroundColor = .lightGray
+       
+        
     }
     
 }
