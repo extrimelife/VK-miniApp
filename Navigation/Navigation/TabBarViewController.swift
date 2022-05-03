@@ -9,13 +9,14 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
+    let logInViewController = LogInViewController()
     let feedViewController = FeedViewController()
     let profileViewController = ProfileViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpController()
-        
+        setupNavigationController()
     }
     
     private func setUpController() {
@@ -25,12 +26,23 @@ class TabBarViewController: UITabBarController {
         feedViewController.tabBarItem.image = UIImage(systemName: "play.circle")
         feedViewController.navigationItem.title = "Feed"
         
-        let profileController = UINavigationController(rootViewController: profileViewController)
-        profileViewController.tabBarItem.title = "Профиль"
-        profileViewController.tabBarItem.image = UIImage(systemName: "person.crop.circle")
-        profileViewController.navigationItem.title = "Profile"
+        
+        let profileController = UINavigationController(rootViewController: logInViewController)
+        logInViewController.tabBarItem.title = "Профиль"
+        logInViewController.tabBarItem.image = UIImage(systemName: "person.crop.circle")
+        logInViewController.navigationItem.title = "Profile"
+        
         viewControllers = [feedController, profileController]
     }
     
+    private func setupNavigationController() {
+        let navigationBar = UINavigationBarAppearance()
+        navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.standardAppearance =  navigationBar
+        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBar
+        view.backgroundColor = .lightGray
+       
+        
+    }
+    
 }
-

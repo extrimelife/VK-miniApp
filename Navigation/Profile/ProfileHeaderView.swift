@@ -6,7 +6,9 @@
 //
 
 import UIKit
+
 class ProfileHeaderView: UIView {
+    
     
     private var statusText: String?
     
@@ -58,6 +60,9 @@ class ProfileHeaderView: UIView {
         fieldText.backgroundColor = .white
         fieldText.layer.cornerRadius = 12
         fieldText.layer.borderWidth = 1
+        fieldText.placeholder = "Set your status..."
+        fieldText.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: fieldText.frame.height))
+        fieldText.leftViewMode = .always
         fieldText.layer.borderColor = UIColor.black.cgColor
         fieldText.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         fieldText.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
@@ -88,39 +93,44 @@ class ProfileHeaderView: UIView {
     @objc private func statusTextChanged() {
         statusText = textField.text ?? ""
         
-        
     }
     
     private func setupLayout() {
         [image, label, text, setupButton, textField].forEach { self.addSubview($0) }
         
         NSLayoutConstraint.activate([
+            
             //constrain UIimage
             image.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
             image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             image.widthAnchor.constraint(equalToConstant: 100),
             image.heightAnchor.constraint(equalToConstant: 100),
             label.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+            
             //constrain UIlabel
             label.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 20),
             label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             label.heightAnchor.constraint(equalToConstant: 30),
+            
             //constrain UItext
             text.topAnchor.constraint(equalTo: label.bottomAnchor),
             text.leadingAnchor.constraint(equalTo: label.leadingAnchor),
             text.trailingAnchor.constraint(equalTo: label.trailingAnchor),
             text.heightAnchor.constraint(equalToConstant: 40),
+            
             //constrain UIbutton
             setupButton.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 16),
             setupButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             setupButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             setupButton.heightAnchor.constraint(equalToConstant: 50),
+            
             //constrain UItextfield
             textField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 27),
             textField.leadingAnchor.constraint(equalTo: label.leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: label.trailingAnchor),
-            textField.heightAnchor.constraint(equalToConstant: 40)
+            textField.heightAnchor.constraint(equalToConstant: 40),
         ])
-        
     }
+    
 }
+
