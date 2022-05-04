@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7227D5D28211E8600B8AB63 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7227D5C28211E8600B8AB63 /* PostModel.swift */; };
+		B7227D5F28214CD200B8AB63 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7227D5E28214CD200B8AB63 /* PostTableViewCell.swift */; };
+		B7227D61282158D700B8AB63 /* UiView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7227D60282158D600B8AB63 /* UiView + Extension.swift */; };
 		B775F11A282000FB00648D35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775F119282000FB00648D35 /* AppDelegate.swift */; };
 		B775F123282000FC00648D35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B775F122282000FC00648D35 /* Assets.xcassets */; };
 		B775F126282000FC00648D35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B775F124282000FC00648D35 /* LaunchScreen.storyboard */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B7227D5C28211E8600B8AB63 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		B7227D5E28214CD200B8AB63 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		B7227D60282158D600B8AB63 /* UiView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiView + Extension.swift"; sourceTree = "<group>"; };
 		B775F116282000FB00648D35 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B775F119282000FB00648D35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B775F122282000FC00648D35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +94,9 @@
 				B775F12F282002B300648D35 /* ProfileViewController.swift */,
 				B7E84D8F2820121400CDF66B /* LogInViewController.swift */,
 				B7E84D91282012D600CDF66B /* HexUiColor.swift */,
+				B7227D5C28211E8600B8AB63 /* PostModel.swift */,
+				B7227D5E28214CD200B8AB63 /* PostTableViewCell.swift */,
+				B7227D60282158D600B8AB63 /* UiView + Extension.swift */,
 				B775F122282000FC00648D35 /* Assets.xcassets */,
 			);
 			path = Profile;
@@ -173,6 +182,9 @@
 				B775F11A282000FB00648D35 /* AppDelegate.swift in Sources */,
 				B775F1342820042200648D35 /* PostViewController.swift in Sources */,
 				B775F13B2820076C00648D35 /* ProfileHeaderView.swift in Sources */,
+				B7227D5D28211E8600B8AB63 /* PostModel.swift in Sources */,
+				B7227D5F28214CD200B8AB63 /* PostTableViewCell.swift in Sources */,
+				B7227D61282158D700B8AB63 /* UiView + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

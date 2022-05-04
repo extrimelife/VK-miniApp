@@ -149,13 +149,14 @@ class LogInViewController: UIViewController {
             // Констрейнт для стэка:
             stackView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 120),
             stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             stackView.heightAnchor.constraint(equalToConstant: 100),
             
             // Констрейнт для кнопки:
             buttonView.topAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.bottomAnchor, constant: 16),
-            buttonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            buttonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            buttonView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            buttonView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             buttonView.heightAnchor.constraint(equalToConstant: 50),
             buttonView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
@@ -171,6 +172,7 @@ class LogInViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
         ])
         
     }

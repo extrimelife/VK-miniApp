@@ -40,7 +40,7 @@ class TabBarViewController: UITabBarController {
         navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.standardAppearance =  navigationBar
         self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBar
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
        
         
     }

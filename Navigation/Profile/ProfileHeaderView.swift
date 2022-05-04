@@ -9,7 +9,6 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    
     private var statusText: String?
     
     override init(frame: CGRect) {
