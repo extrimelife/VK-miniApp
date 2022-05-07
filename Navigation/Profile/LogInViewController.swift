@@ -14,7 +14,7 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true 
         setupLayout()
         logTextField.delegate = self
         pasTextField.delegate = self
