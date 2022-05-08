@@ -29,9 +29,11 @@ class ProfileViewController: UIViewController {
         // Устанавливаю title в профиле
         navigationItem.title = "Профиль"
         navigationController?.navigationBar.isHidden = false
+        self.view.backgroundColor = .systemGray6
         setupLayout()
+        hideKeyboardTappedAround()
         
-    }
+}
     
     
     private func setupLayout() {
@@ -55,17 +57,19 @@ extension ProfileViewController: UITableViewDataSource {
         if indexPath.item != 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
             cell.setupCell(postModel[indexPath.row - 1])
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
-            cell.setupLabel("Photos")
-            //Вызов кнопки с переходом в галерею
-            cell.delegate = self
             cell.selectionStyle = .none
             return cell
         }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
+        cell.setupLabel("Photos")
+        //Вызов кнопки с переходом в галерею
+        cell.delegate = self
+        cell.selectionStyle = .none
+        return cell
     }
 }
+
 
 // MARK: UiTAbleViewDelegate
 extension ProfileViewController: UITableViewDelegate {
@@ -92,3 +96,21 @@ extension ProfileViewController: PhotosTableViewCellDelegate {
     }
 }
 
+//Расширение для закрытия клавиатуры при нажатии на любую часть экрана в профиле
+extension ProfileViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
+    
+    func hideKeyboardTappedAround() {
+        let press: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        press.cancelsTouchesInView = false
+        view.addGestureRecognizer(press)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
