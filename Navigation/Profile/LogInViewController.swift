@@ -14,11 +14,11 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true 
         setupLayout()
         logTextField.delegate = self
         pasTextField.delegate = self
-    
+        hideKeyboardTappedAround()
     }
     
     private let imageView: UIImageView = {
@@ -111,14 +111,19 @@ class LogInViewController: UIViewController {
     }
     
     @objc private func keyboardShow(notification: NSNotification) {
+        
+        let offSet: CGFloat = 100
+        
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            scrollView.contentInset.bottom = keyboardSize.height
+            let size = view.frame.height - keyboardSize.height
+            scrollView.contentOffset = CGPoint(x: 0, y: buttonView.frame.origin.y - size + offSet)
             scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+            
         }
     }
     
     @objc private func keyboardHide() {
-        scrollView.contentInset = .zero
+        scrollView.contentOffset = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
     }
     
@@ -179,14 +184,29 @@ class LogInViewController: UIViewController {
     
 }
 
-//Расширение для закрытия клавиатуры
+//Расширение для закрытия клавиатуры при нажатии на любую часть экрана
 extension LogInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
     }
     
+    func hideKeyboardTappedAround() {
+        let press: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        press.cancelsTouchesInView = false
+        view.addGestureRecognizer(press)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
 }
+
+
+
+    
+    
 
 
 

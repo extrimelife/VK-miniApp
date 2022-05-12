@@ -14,6 +14,7 @@ class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
+
     }
     
     required init?(coder: NSCoder) {
@@ -104,9 +105,10 @@ class ProfileHeaderView: UIView {
             image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             image.widthAnchor.constraint(equalToConstant: 100),
             image.heightAnchor.constraint(equalToConstant: 100),
-            label.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+            
             
             //constrain UIlabel
+            label.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
             label.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 20),
             label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             label.heightAnchor.constraint(equalToConstant: 30),
@@ -132,4 +134,5 @@ class ProfileHeaderView: UIView {
     }
     
 }
+
 

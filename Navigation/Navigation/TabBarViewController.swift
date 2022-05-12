@@ -17,6 +17,7 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
         setUpController()
         setupNavigationController()
+        
     }
     
     private func setUpController() {
@@ -30,7 +31,8 @@ class TabBarViewController: UITabBarController {
         let profileController = UINavigationController(rootViewController: logInViewController)
         logInViewController.tabBarItem.title = "Профиль"
         logInViewController.tabBarItem.image = UIImage(systemName: "person.crop.circle")
-        logInViewController.navigationItem.title = "Profile"
+        
+        
         
         viewControllers = [feedController, profileController]
     }
@@ -41,7 +43,6 @@ class TabBarViewController: UITabBarController {
         self.navigationController?.navigationBar.standardAppearance =  navigationBar
         self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBar
         view.backgroundColor = .white
-       
         
     }
     

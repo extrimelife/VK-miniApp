@@ -17,6 +17,7 @@ class PostViewController: UIViewController {
         view.backgroundColor = .cyan
         
     }
+    
     private func setupController() {
         if let post = post {
             self.title = post.title
