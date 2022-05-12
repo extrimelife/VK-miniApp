@@ -14,12 +14,33 @@ class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
-
+        setupGesture()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private let blackView: UIView = {
+        let viewBlack = UIView()
+        viewBlack.translatesAutoresizingMaskIntoConstraints = false
+        viewBlack.alpha = 0
+        viewBlack.backgroundColor = .black
+        viewBlack.frame = UIScreen.main.bounds
+        return viewBlack
+    }()
+    
+    private let buttonBlackView: UIButton = {
+        let buttonView = UIButton()
+        buttonView.translatesAutoresizingMaskIntoConstraints = false
+        buttonView.setImage(UIImage(systemName: "xmark"), for: .normal)
+        buttonView.tintColor = .systemGray4
+        buttonView.alpha = 0
+        buttonView.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+        return buttonView
+    }()
+    
     
     private let image: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "square"))
@@ -95,21 +116,32 @@ class ProfileHeaderView: UIView {
         
     }
     
+    // Присваиваю констрейнты к переменным чтобы констрейнты использовать для анимации
+    private var topImage = NSLayoutConstraint()
+    private var leadingImage = NSLayoutConstraint()
+    private var widthImage = NSLayoutConstraint()
+    private var heightImage = NSLayoutConstraint()
+    
+    
     private func setupLayout() {
+        
         [image, label, text, setupButton, textField].forEach { self.addSubview($0) }
+        
+        // Задаю отдельно констрейнты для UiImage чтобы сделать анимацию ниже
+        topImage = image.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16)
+        leadingImage = image.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+        widthImage = image.widthAnchor.constraint(equalToConstant: 100)
+        heightImage = image.heightAnchor.constraint(equalToConstant: 100)
+        
         
         NSLayoutConstraint.activate([
             
-            //constrain UIimage
-            image.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
-            image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            image.widthAnchor.constraint(equalToConstant: 100),
-            image.heightAnchor.constraint(equalToConstant: 100),
-            
+            // constraint imageView
+            topImage, leadingImage, widthImage, heightImage,
             
             //constrain UIlabel
             label.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-            label.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 20),
+            label.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 130),
             label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             label.heightAnchor.constraint(equalToConstant: 30),
             
@@ -120,7 +152,7 @@ class ProfileHeaderView: UIView {
             text.heightAnchor.constraint(equalToConstant: 40),
             
             //constrain UIbutton
-            setupButton.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 16),
+            setupButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16),
             setupButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             setupButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             setupButton.heightAnchor.constraint(equalToConstant: 50),
@@ -133,6 +165,62 @@ class ProfileHeaderView: UIView {
         ])
     }
     
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionTap))
+        image.isUserInteractionEnabled = true
+        image.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func actionTap() {
+        addSubview(blackView)
+        addSubview(buttonBlackView)
+        bringSubviewToFront(image)
+        
+        NSLayoutConstraint.activate([
+            buttonBlackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            buttonBlackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            buttonBlackView.widthAnchor.constraint(equalToConstant: 30),
+            buttonBlackView.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+            self.blackView.alpha = 0.8
+            self.image.layer.cornerRadius = 0
+            self.topImage.constant = 100
+            self.leadingImage.constant = 0
+            self.widthImage.constant = UIScreen.main.bounds.width
+            self.heightImage.constant = UIScreen.main.bounds.width
+            self.layoutIfNeeded()
+            
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.buttonBlackView.alpha = 1
+            }
+        }
+    }
+    
+    @objc private func cancelAction() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+            self.buttonBlackView.alpha = 0
+            
+        } completion: { _ in
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+                self.image.layer.cornerRadius = 50
+                self.topImage.constant = 0
+                self.leadingImage.constant = 16
+                self.widthImage.constant = 100
+                self.heightImage.constant = 100
+                self.blackView.alpha = 0
+                self.layoutIfNeeded()
+            }
+        }
+        
+    }
 }
+
+
+
+
+
 
 

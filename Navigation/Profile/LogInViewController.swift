@@ -127,6 +127,7 @@ class LogInViewController: UIViewController {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
     
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
