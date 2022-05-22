@@ -17,7 +17,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     let imageModel = ImageModel.makeImage()
     
-    // Создаю TableCollection для фото на странице TableView в профиле
+    // Создаю TableViewCollection для фото на странице TableView в профиле
     private lazy var collectionView: UICollectionView = {
         let layoutCollection = UICollectionViewFlowLayout()
         layoutCollection.scrollDirection = .horizontal
@@ -47,6 +47,8 @@ class PhotosTableViewCell: UITableViewCell {
         button.addTarget(self, action: #selector(goToGallery), for: .touchUpInside)
         return button
     }()
+    
+    
     
     @objc private func goToGallery() {
         delegate?.buttonTap()

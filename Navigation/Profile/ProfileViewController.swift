@@ -10,7 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     private let imageModel = ImageModel.makeImage()
-    private let postModel = ModelPost.makePost()
+    private var postModel = ModelPost.makePost()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -49,6 +49,20 @@ class ProfileViewController: UIViewController {
 
 // MARK: UITableViewDataSourse
 extension ProfileViewController: UITableViewDataSource {
+    
+    // удаление по свайпу
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete  {
+            if indexPath.row != 0 {
+                tableView.beginUpdates()
+                postModel.remove(at: indexPath.row - 1)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.endUpdates()
+                
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return postModel.count + 1
     }
@@ -56,7 +70,8 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.item != 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-            cell.setupCell(postModel[indexPath.row - 1])
+            cell.tapPostImageDelegate = self
+            cell.setupCell(postModel[indexPath.item - 1])
             cell.selectionStyle = .none
             return cell
         }
@@ -68,11 +83,13 @@ extension ProfileViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
+    
 }
 
 
 // MARK: UiTAbleViewDelegate
 extension ProfileViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -87,6 +104,7 @@ extension ProfileViewController: UITableViewDelegate {
         return section == 0 ? 200 : 0
         
     }
+    
 }
 
 extension ProfileViewController: PhotosTableViewCellDelegate {
@@ -94,6 +112,7 @@ extension ProfileViewController: PhotosTableViewCellDelegate {
         let photosViewController = PhotosViewController()
         navigationController?.pushViewController(photosViewController, animated: true)
     }
+    
 }
 
 //Расширение для закрытия клавиатуры при нажатии на любую часть экрана в профиле
@@ -112,5 +131,16 @@ extension ProfileViewController: UITextFieldDelegate {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+// Расширение для открытия поста в новой View со счетчиком просмотров
+extension ProfileViewController: TapPostImageDelegate {
+    func postImagePress(author: String, description: String, image: String) {
+        let showVc = ShowPostViewController()
+        showVc.titleLabel.text = author
+        showVc.photoView.image = UIImage(named: image)
+        showVc.descriptionView.text = description
+        navigationController?.pushViewController(showVc, animated: true)
     }
 }

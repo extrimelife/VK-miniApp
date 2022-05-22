@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol PhotoCellDelegate: AnyObject {
+    func tapAction(photo: UIImage)
+    func cancelAnimationButton()
+}
+
 class PhotosCollectionViewCell: UICollectionViewCell {
+    
+    weak var buttonAllPhotoCellDelegate: PhotoCellDelegate?
     
     private let imageForGallery: UIImageView = {
         let galleryImage = UIImageView()
@@ -20,10 +27,21 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         imageLayout()
+        setupGestures()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoAction))
+        imageForGallery.isUserInteractionEnabled = true 
+        imageForGallery.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func photoAction() {
+        buttonAllPhotoCellDelegate?.tapAction(photo: imageForGallery.image!)
     }
     
     // Функция отвечает за показ фото
@@ -34,7 +52,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     private func imageLayout() {
         contentView.addSubview(imageForGallery)
         
-        // Констрейнт для imageView на TableView для CollectionView
+        // Констрейнт для imageView на для CollectionView
         NSLayoutConstraint.activate([
             imageForGallery.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageForGallery.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
