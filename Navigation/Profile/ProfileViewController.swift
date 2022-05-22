@@ -33,7 +33,7 @@ class ProfileViewController: UIViewController {
         setupLayout()
         hideKeyboardTappedAround()
         
-}
+    }
     
     
     private func setupLayout() {
