@@ -81,11 +81,12 @@ class ProfileHeaderView: UIView {
         fieldText.backgroundColor = .white
         fieldText.layer.cornerRadius = 12
         fieldText.layer.borderWidth = 1
+        fieldText.clearButtonMode = .whileEditing
         fieldText.placeholder = "Set your status..."
         fieldText.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: fieldText.frame.height))
         fieldText.leftViewMode = .always
         fieldText.layer.borderColor = UIColor.black.cgColor
-        fieldText.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        fieldText.font = UIFont.systemFont(ofSize: 15)
         fieldText.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         return fieldText
     }()
@@ -105,10 +106,19 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    
-    @objc private func tapAction() {
-        text.text = statusText
-        print(text.text ?? "")
+        // Внедряю проверку на пустой textField при установке статуса!
+        @objc private func tapAction() {
+        if textField.text == "" {
+            textField.attributedPlaceholder = NSAttributedString(string: "Cannot be empty...",
+                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            
+        } else if textField.text != "" {
+            textField.attributedPlaceholder = NSAttributedString(string: "Set your status...",
+                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+            text.text = statusText
+            print(text.text ?? "")
+            
+        }
     }
     
     @objc private func statusTextChanged() {
@@ -175,6 +185,7 @@ class ProfileHeaderView: UIView {
         addSubview(blackView)
         addSubview(buttonBlackView)
         bringSubviewToFront(image)
+    
         
         NSLayoutConstraint.activate([
             buttonBlackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),

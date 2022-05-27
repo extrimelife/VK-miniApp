@@ -7,7 +7,17 @@
 
 import UIKit
 
+// Протокол для перехода к полному описанию поста с счетчиком просмотров
+protocol TapPostImageDelegate: AnyObject {
+    func postImagePress(author: String, description: String, image: String)
+}
+
+//Контроллер таблицы(посты в профиле)
 class PostTableViewCell: UITableViewCell {
+    
+    weak var tapPostImageDelegate: TapPostImageDelegate?
+    
+    private var modelPost = ModelPost(author: "", description: "", image: "путешественник", likes: 1, views: 1)
     
     private let whiteView: UIView = {
         let viewWhite = UIView()
@@ -24,16 +34,17 @@ class PostTableViewCell: UITableViewCell {
         return labelTitle
     }()
     
-    private let photoView: UIImageView = {
+    private var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.backgroundColor = .black
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
-    private let descriptionView: UILabel = {
+    private var descriptionView: UILabel = {
         let textView = UILabel()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -42,15 +53,16 @@ class PostTableViewCell: UITableViewCell {
         return textView
     }()
     
-    private let likesLabel: UILabel = {
+    private var likesLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
+        label.isUserInteractionEnabled = true
         return label
     }()
     
-    private let viewLabel: UILabel = {
+    private var viewLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16, weight: .regular)
@@ -62,13 +74,50 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layoutSetup()
+        setupGestures()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setupGestures() {
+        let tapLikeLabelGesture = UITapGestureRecognizer(target: self, action: #selector(likeAction))
+        likesLabel.addGestureRecognizer(tapLikeLabelGesture)
+        
+        let tapPostImageViewGesture = UITapGestureRecognizer(target: self, action: #selector(postImageViewAction))
+        photoView.addGestureRecognizer(tapPostImageViewGesture)
+        
+    }
+    
+    @objc private func postImageViewAction() {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0.0,
+                       usingSpringWithDamping: 1.0,
+                       initialSpringVelocity: 0.0,
+                       options: .curveEaseInOut) {
+            
+            self.modelPost.views += 1
+            self.viewLabel.text = "Views \(self.modelPost.views)"
+            self.tapPostImageDelegate?.postImagePress(author: self.modelPost.author, description: self.modelPost.description, image: self.modelPost.image)
+        }
+    }
+    
+    @objc private func likeAction() {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0.0,
+                       usingSpringWithDamping: 1.0,
+                       initialSpringVelocity: 0.0,
+                       options: .curveEaseInOut) {
+            
+            self.modelPost.likes += 1
+            self.likesLabel.text = "Likes \(self.modelPost.likes )"
+        }
+    }
+    
+    
     func setupCell(_ model: ModelPost) {
+        modelPost = model
         titleLabel.text = model.author
         photoView.image = UIImage(named: model.image)
         descriptionView.text = model.description

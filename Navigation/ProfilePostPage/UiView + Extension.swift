@@ -8,7 +8,6 @@
 import UIKit
 
 //Идентификатор для TableView
-
 extension UIView {
     static var identifier: String {
         return String(describing: self)
