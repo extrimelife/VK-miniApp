@@ -16,7 +16,7 @@ class PhotosTableViewCell: UITableViewCell {
     weak var delegate: PhotosTableViewCellDelegate?
     let imageModel = ImageModel.makeImage()
     
-    //MARK: - Создаю TableViewCollection для фото на странице TableView в профиле
+    // Создаю TableViewCollection для фото на странице TableView в профиле
     private lazy var collectionView: UICollectionView = {
         let layoutCollection = UICollectionViewFlowLayout()
         layoutCollection.scrollDirection = .horizontal
@@ -63,7 +63,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     
     // Функция для оторажения лэйбла в нашей ячейке в profileViewController для функции cellForRowAt!!!
-    func setupLabel(_ label: String) {
+    func setupLabel() {
         labelText.text = "Photos"
     }
     
@@ -101,8 +101,9 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCellForTableView.identifier, for: indexPath) as! PhotosCollectionViewCellForTableView
-        cell.setupImageModel(imageModel[indexPath.item])
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCellForTableView.identifier, for: indexPath) as? PhotosCollectionViewCellForTableView else { return PhotosCollectionViewCellForTableView() }
+        let imageModel = imageModel[indexPath.item]
+        cell.setupImageModel(imageModel)
         return cell
     }
     
@@ -127,9 +128,5 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return sideInset
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.section, indexPath.item)
     }
 }
