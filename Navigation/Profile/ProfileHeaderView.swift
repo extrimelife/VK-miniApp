@@ -11,17 +11,6 @@ class ProfileHeaderView: UIView {
     
     private var statusText: String?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupLayout()
-        setupGesture()
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private let blackView: UIView = {
         let viewBlack = UIView()
         viewBlack.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +20,7 @@ class ProfileHeaderView: UIView {
         return viewBlack
     }()
     
-    private let buttonBlackView: UIButton = {
+    private lazy var buttonBlackView: UIButton = {
         let buttonView = UIButton()
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         buttonView.setImage(UIImage(systemName: "xmark"), for: .normal)
@@ -74,7 +63,7 @@ class ProfileHeaderView: UIView {
     }()
     
     
-    private let textField: UITextField = {
+    private lazy var textField: UITextField = {
         let fieldText = UITextField()
         fieldText.translatesAutoresizingMaskIntoConstraints = false
         fieldText.text = ""
@@ -91,7 +80,7 @@ class ProfileHeaderView: UIView {
         return fieldText
     }()
     
-    private let setupButton: UIButton = {
+    private lazy var setupButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .blue
@@ -106,8 +95,20 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-        // Внедряю проверку на пустой textField при установке статуса!
-        @objc private func tapAction() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupLayout()
+        setupGesture()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // Внедряю проверку на пустой textField при установке статуса!
+    @objc private func tapAction() {
         if textField.text == "" {
             textField.attributedPlaceholder = NSAttributedString(string: "Cannot be empty...",
                                                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
@@ -166,6 +167,7 @@ class ProfileHeaderView: UIView {
             setupButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             setupButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             setupButton.heightAnchor.constraint(equalToConstant: 50),
+            setupButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             //constrain UItextfield
             textField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 27),
@@ -185,7 +187,7 @@ class ProfileHeaderView: UIView {
         addSubview(blackView)
         addSubview(buttonBlackView)
         bringSubviewToFront(image)
-    
+        
         
         NSLayoutConstraint.activate([
             buttonBlackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),

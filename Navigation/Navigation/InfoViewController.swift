@@ -29,6 +29,7 @@ class InfoViewController: UIViewController {
         let okAction = UIAlertAction(title: "Выйти", style: .default) { _ in
             self.dismiss(animated: true)
         }
+        
         let cancelAction = UIAlertAction(title: "Отмена", style: .destructive)
         alert.addAction(cancelAction)
         alert.addAction(okAction)

@@ -9,14 +9,6 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .yellow
-        stackVc()
-        
-    }
-    
     private let stackView: UIStackView = {
         let viewStack = UIStackView()
         viewStack.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +18,7 @@ class FeedViewController: UIViewController {
         return viewStack
     }()
     
-    private let setButton: UIButton = {
+    private lazy var setButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .brown
@@ -41,13 +33,8 @@ class FeedViewController: UIViewController {
         return button
     }()
     
-    @objc private func tapAction() {
-        let postViewController = PostViewController()
-        postViewController.post = Post(title: "Post")
-        navigationController?.pushViewController(postViewController, animated: true)
-    }
     
-    private let viewButton: UIButton = {
+    private lazy var viewButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .label
@@ -62,6 +49,19 @@ class FeedViewController: UIViewController {
         return button
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        stackVc()
+        
+    }
+    
+    @objc private func tapAction() {
+        let postViewController = PostViewController()
+        postViewController.post = Post(title: "Post")
+        navigationController?.pushViewController(postViewController, animated: true)
+    }
+    
+    
     @objc private func didAction() {
         let postViewController = PostViewController()
         postViewController.post = Post(title: "Post")
@@ -69,6 +69,7 @@ class FeedViewController: UIViewController {
     }
     
     private func stackVc() {
+        view.backgroundColor = .yellow
         view.addSubview(stackView)
         [setButton, viewButton] .forEach { stackView.addArrangedSubview($0) }
         
@@ -79,5 +80,4 @@ class FeedViewController: UIViewController {
             stackView.heightAnchor.constraint(equalToConstant: 100),
         ])
     }
-    
 }

@@ -10,14 +10,6 @@ import UIKit
 // Контроллер для просмотра описания моих постов!
 class ShowPostViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setLayout()
-        view.backgroundColor = .systemGray6
-        navigationItem.title = "Описание"
-        navigationController?.navigationBar.isHidden = false
-    }
-    
     var scrollView: UIScrollView = {
         let viewScroll = UIScrollView()
         viewScroll.translatesAutoresizingMaskIntoConstraints = false
@@ -75,6 +67,14 @@ class ShowPostViewController: UIViewController {
         label.textAlignment = .right
         return label
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setLayout()
+        view.backgroundColor = .systemGray6
+        navigationItem.title = "Описание"
+        navigationController?.navigationBar.isHidden = false
+    }
     
     
     private func setLayout() {

@@ -23,7 +23,7 @@ class PhotosViewController: UIViewController {
     }()
     
     // Создаю кнопку крестик для выхода из полноэкранного режима
-    private let buttonCancelAnimation: UIButton = {
+    private lazy var buttonCancelAnimation: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.addTarget(self, action: #selector(cancelAnimationButton), for: .touchUpInside)

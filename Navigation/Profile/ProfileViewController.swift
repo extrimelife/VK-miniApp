@@ -101,7 +101,7 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 200 : 0
+        return UITableView.automaticDimension
         
     }
     
