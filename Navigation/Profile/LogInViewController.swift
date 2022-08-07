@@ -14,16 +14,6 @@ class LogInViewController: UIViewController {
     private let login = "extrimelife@hotmail.com"
     private let password = "12345678"
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        navigationController?.navigationBar.isHidden = true
-        setupLayout()
-        logTextField.delegate = self
-        pasTextField.delegate = self
-        hideKeyboardTappedAround()
-    }
-    
     private let imageView: UIImageView = {
         let viewImage = UIImageView()
         viewImage.translatesAutoresizingMaskIntoConstraints = false
@@ -87,7 +77,7 @@ class LogInViewController: UIViewController {
         return textFieldPas
     }()
     
-    private let buttonView: UIButton = {
+    private lazy var buttonView: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor(hexString: "#4885CC")
@@ -112,6 +102,16 @@ class LogInViewController: UIViewController {
         contentView.backgroundColor = .white
         return contentView
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        navigationController?.navigationBar.isHidden = true
+        setupLayout()
+        logTextField.delegate = self
+        pasTextField.delegate = self
+        hideKeyboardTappedAround()
+    }
     
     
     
@@ -150,7 +150,7 @@ class LogInViewController: UIViewController {
             logTextField.attributedPlaceholder = NSAttributedString(string: "Email is incorrect",
                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
             
-        } 
+        }
         
         // Проверка на определенное количество вводимых символов пароля
         if pasTextField.text!.count < 8 && pasTextField.text != "" {
@@ -285,7 +285,7 @@ extension LogInViewController: UITextFieldDelegate {
 
 
 
-    
 
-    
- 
+
+
+

@@ -14,10 +14,9 @@ protocol PhotosTableViewCellDelegate: AnyObject {
 class PhotosTableViewCell: UITableViewCell {
     
     weak var delegate: PhotosTableViewCellDelegate?
-    
     let imageModel = ImageModel.makeImage()
     
-    // Создаю TableViewCollection для фото на странице TableView в профиле
+    //MARK: - Создаю TableViewCollection для фото на странице TableView в профиле
     private lazy var collectionView: UICollectionView = {
         let layoutCollection = UICollectionViewFlowLayout()
         layoutCollection.scrollDirection = .horizontal
@@ -39,7 +38,7 @@ class PhotosTableViewCell: UITableViewCell {
     }()
     
     // Создаю кнопку стрелочку выше CollectionView для перехода в галерею
-    private  let button: UIButton = {
+    private lazy var button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .black
@@ -47,13 +46,6 @@ class PhotosTableViewCell: UITableViewCell {
         button.addTarget(self, action: #selector(goToGallery), for: .touchUpInside)
         return button
     }()
-    
-    
-    
-    @objc private func goToGallery() {
-        delegate?.buttonTap()
-    }
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -63,6 +55,12 @@ class PhotosTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    @objc private func goToGallery() {
+        delegate?.buttonTap()
+    }
+    
     
     // Функция для оторажения лэйбла в нашей ячейке в profileViewController для функции cellForRowAt!!!
     func setupLabel(_ label: String) {

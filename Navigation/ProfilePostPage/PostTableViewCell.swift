@@ -98,6 +98,7 @@ class PostTableViewCell: UITableViewCell {
                        options: .curveEaseInOut) {
             
             self.modelPost.views += 1
+            
             self.viewLabel.text = "Views \(self.modelPost.views)"
             self.tapPostImageDelegate?.postImagePress(author: self.modelPost.author, description: self.modelPost.description, image: self.modelPost.image)
         }
@@ -111,7 +112,7 @@ class PostTableViewCell: UITableViewCell {
                        options: .curveEaseInOut) {
             
             self.modelPost.likes += 1
-            self.likesLabel.text = "Likes \(self.modelPost.likes )"
+            self.likesLabel.text = "Likes \(self.modelPost.likes)"
         }
     }
     
