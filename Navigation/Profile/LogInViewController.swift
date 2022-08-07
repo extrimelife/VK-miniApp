@@ -11,7 +11,7 @@ class LogInViewController: UIViewController {
     
     private let notificationCenter = NotificationCenter.default
     
-    private let login = "extrimelife@hotmail.com"
+    private let login = "extrimelife@hotmail.ru"
     private let password = "12345678"
     
     private let imageView: UIImageView = {
