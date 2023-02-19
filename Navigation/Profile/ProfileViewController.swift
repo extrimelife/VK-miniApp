@@ -110,7 +110,7 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController: PhotosTableViewCellDelegate {
     func buttonTap() {
-        let photosViewController = PhotosViewController()
+        let photosViewController = GalleryViewController()
         navigationController?.pushViewController(photosViewController, animated: true)
     }
     
