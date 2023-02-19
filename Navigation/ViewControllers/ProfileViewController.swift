@@ -55,21 +55,21 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        switch indexPath.row {
+        case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as? PhotosTableViewCell else { return PhotosTableViewCell() }
             cell.setupLabel()
-            //Вызов кнопки с переходом в галерею
             cell.delegate = self
             cell.selectionStyle = .none
             return cell
+        default :
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell else { return PostTableViewCell() }
+            let postModel = postModel[indexPath.row]
+            cell.setupCell(postModel)
+            cell.tapPostImageDelegate = self
+            cell.selectionStyle = .none
+            return cell
         }
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell else { return PostTableViewCell() }
-        let postModel = postModel[indexPath.row]
-        cell.setupCell(postModel)
-        cell.tapPostImageDelegate = self
-        cell.selectionStyle = .none
-        return cell
     }
     
     // удаление по свайпу

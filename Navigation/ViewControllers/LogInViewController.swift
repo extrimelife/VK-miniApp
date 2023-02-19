@@ -7,10 +7,11 @@
 
 import UIKit
 
-class LogInViewController: UIViewController {
+final class LogInViewController: UIViewController {
+  
+// MARK: Private properties
     
     private let notificationCenter = NotificationCenter.default
-    
     private let login = ""
     private let password = ""
     
@@ -102,6 +103,8 @@ class LogInViewController: UIViewController {
         contentView.backgroundColor = .white
         return contentView
     }()
+ 
+// MARK: - Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,19 +116,27 @@ class LogInViewController: UIViewController {
         hideKeyboardTappedAround()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        notificationCenter.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
-    // Функция для проверки валидации пароля
-    func isValidEmail(_ email: String) -> Bool {
+// MARK: - Private Functions
+    
+   private func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
     
-    
     @objc private func goToProfile () {
-        
-        // Проверка на пустые поля логина и пароля с выделением текста и анимацией стека
         if logTextField.text == "" || pasTextField.text == "" {
             let animation = CABasicAnimation(keyPath: "position")
             animation.duration = 0.07
@@ -149,8 +160,7 @@ class LogInViewController: UIViewController {
             logTextField.text = ""
             logTextField.attributedPlaceholder = NSAttributedString(string: "Email is incorrect",
                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-            
-        }
+            }
         
         // Проверка на определенное количество вводимых символов пароля
         if pasTextField.text!.count < 8 && pasTextField.text != "" {
@@ -176,12 +186,6 @@ class LogInViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        notificationCenter.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
     @objc private func keyboardShow(notification: NSNotification) {
         
         let offSet: CGFloat = 100
@@ -199,15 +203,6 @@ class LogInViewController: UIViewController {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
     
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-    }
-    
-    
     private func setupLayout() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -218,53 +213,41 @@ class LogInViewController: UIViewController {
         [logTextField, pasTextField] .forEach { stackView.addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
-            
-            // Констрейнт для картинки:
             imageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 120),
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 100),
             imageView.heightAnchor.constraint(equalToConstant: 100),
             
-            // Констрейнт для стэка:
             stackView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 120),
             stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             stackView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             stackView.heightAnchor.constraint(equalToConstant: 100),
             
-            // Констрейнт для проверки на длину пароля
             alertLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor),
             alertLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
             alertLabel.bottomAnchor.constraint(equalTo: buttonView.topAnchor),
             
-            // Констрейнт для кнопки:
             buttonView.topAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.bottomAnchor, constant: 16),
             buttonView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             buttonView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             buttonView.heightAnchor.constraint(equalToConstant: 50),
             buttonView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            // Констрейнт для scrollView
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            // Констрейнт для contentView
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            
         ])
-        
     }
-    
 }
 
-
-//Расширение для закрытия клавиатуры при нажатии на любую часть экрана
 extension LogInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)

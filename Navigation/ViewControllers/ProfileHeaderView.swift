@@ -117,7 +117,7 @@ class ProfileHeaderView: UIView {
             textField.attributedPlaceholder = NSAttributedString(string: "Set your status...",
                                                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
             text.text = statusText
-            print(text.text ?? "")
+           // print(text.text ?? "")
             
         }
     }
