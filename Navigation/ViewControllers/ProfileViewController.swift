@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
+    
+// MARK: - Private Properties
     
     private let imageModel = ImageModel.makeImage()
     private var postModel = ModelPost.makePost()
@@ -23,18 +25,19 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
+ // MARK: - Override Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Устанавливаю title в профиле
-        navigationItem.title = "Профиль"
-        navigationController?.navigationBar.isHidden = false
-        view.backgroundColor = .systemGray6
         setupLayout()
         hideKeyboardTappedAround()
-        
+        setupNavigationBar()
     }
     
+    private func setupNavigationBar() {
+        navigationItem.title = "Главная"
+        navigationController?.navigationBar.isHidden = false
+    }
     
     private func setupLayout() {
         view.addSubview(tableView)
@@ -48,8 +51,8 @@ class ProfileViewController: UIViewController {
 }
 
 // MARK: UITableViewDataSourse
+
 extension ProfileViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         section == 0 ? postModel.count : imageModel.count
     }
@@ -72,23 +75,20 @@ extension ProfileViewController: UITableViewDataSource {
         }
     }
     
-    // удаление по свайпу
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete  {
             if indexPath.row != 0 {
                 tableView.beginUpdates()
-                postModel.remove(at: indexPath.row - 1)
+                postModel.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 tableView.endUpdates()
-                
             }
         }
     }
-    
 }
 
+// MARK: UITableViewDelegate
 
-// MARK: UiTAbleViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -97,16 +97,15 @@ extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let profileHeaderView = ProfileHeaderView()
-        profileHeaderView.backgroundColor = .systemGray6
-        return section == 0 ? profileHeaderView : nil
+        return profileHeaderView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return UITableView.automaticDimension
-        
+         UITableView.automaticDimension
     }
-    
 }
+
+// MARK: - PhotosTableViewCellDelegate
 
 extension ProfileViewController: PhotosTableViewCellDelegate {
     func buttonTap() {
@@ -116,7 +115,8 @@ extension ProfileViewController: PhotosTableViewCellDelegate {
     
 }
 
-//Расширение для закрытия клавиатуры при нажатии на любую часть экрана в профиле
+// MARK: - UITextFieldDelegate
+
 extension ProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -134,6 +134,8 @@ extension ProfileViewController: UITextFieldDelegate {
         view.endEditing(true)
     }
 }
+
+// MARK: - TapPostImageDelegate
 
 // Расширение для открытия поста в новой View со счетчиком просмотров
 extension ProfileViewController: TapPostImageDelegate {
