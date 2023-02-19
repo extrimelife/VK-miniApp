@@ -22,17 +22,7 @@ final class ProfileHeaderView: UIView {
         return viewBlack
     }()
     
-    private lazy var crossButton: UIButton = {
-        let crossButton = UIButton()
-        crossButton.translatesAutoresizingMaskIntoConstraints = false
-        crossButton.setImage(UIImage(systemName: "xmark"), for: .normal)
-        crossButton.tintColor = .systemGray4
-        crossButton.alpha = 0
-        crossButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
-        return crossButton
-    }()
-    
-    private let image: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "square"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 50
@@ -40,17 +30,16 @@ final class ProfileHeaderView: UIView {
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.clipsToBounds = true
         return imageView
-        
     }()
     
-    private let label: UILabel = {
-        let textLabel = UILabel()
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
-        textLabel.attributedText = NSMutableAttributedString(string: "Hipster Cat")
-        textLabel.textColor = .black
-        textLabel.backgroundColor = .clear
-        textLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        return textLabel
+    private let nameLabel: UILabel = {
+        let nameLabel = UILabel()
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.attributedText = NSMutableAttributedString(string: "Hipster Cat")
+        nameLabel.textColor = .black
+        nameLabel.backgroundColor = .clear
+        nameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        return nameLabel
     }()
     
     private let text: UITextView = {
@@ -79,6 +68,16 @@ final class ProfileHeaderView: UIView {
         fieldText.font = UIFont.systemFont(ofSize: 15)
         fieldText.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         return fieldText
+    }()
+    
+    private lazy var crossButton: UIButton = {
+        let crossButton = UIButton()
+        crossButton.translatesAutoresizingMaskIntoConstraints = false
+        crossButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        crossButton.tintColor = .systemGray4
+        crossButton.alpha = 0
+        crossButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+        return crossButton
     }()
     
     private lazy var setupButton: UIButton = {
@@ -133,26 +132,25 @@ final class ProfileHeaderView: UIView {
     }
     
     private func setupLayout() {
-        [image, label, text, setupButton, textField].forEach { self.addSubview($0) }
+        [imageView, nameLabel, text, setupButton, textField].forEach { self.addSubview($0) }
         
         // Задаю отдельно констрейнты для UiImage чтобы сделать анимацию ниже
-        topImage = image.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16)
-        leadingImage = image.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16)
-        widthImage = image.widthAnchor.constraint(equalToConstant: 100)
-        heightImage = image.heightAnchor.constraint(equalToConstant: 100)
+        topImage = imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16)
+        leadingImage = imageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+        widthImage = imageView.widthAnchor.constraint(equalToConstant: 100)
+        heightImage = imageView.heightAnchor.constraint(equalToConstant: 100)
         
         
         NSLayoutConstraint.activate([
             topImage, leadingImage, widthImage, heightImage,
+            nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+            nameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 130),
+            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            nameLabel.heightAnchor.constraint(equalToConstant: 30),
             
-            label.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-            label.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 130),
-            label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            label.heightAnchor.constraint(equalToConstant: 30),
-            
-            text.topAnchor.constraint(equalTo: label.bottomAnchor),
-            text.leadingAnchor.constraint(equalTo: label.leadingAnchor),
-            text.trailingAnchor.constraint(equalTo: label.trailingAnchor),
+            text.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
+            text.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            text.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             text.heightAnchor.constraint(equalToConstant: 40),
             
             setupButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16),
@@ -161,23 +159,23 @@ final class ProfileHeaderView: UIView {
             setupButton.heightAnchor.constraint(equalToConstant: 50),
             setupButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            textField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 27),
-            textField.leadingAnchor.constraint(equalTo: label.leadingAnchor),
-            textField.trailingAnchor.constraint(equalTo: label.trailingAnchor),
+            textField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 27),
+            textField.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            textField.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             textField.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
     
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionTap))
-        image.isUserInteractionEnabled = true
-        image.addGestureRecognizer(tapGesture)
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGesture)
     }
     
     @objc private func actionTap() {
         addSubview(blackView)
         addSubview(crossButton)
-        bringSubviewToFront(image)
+        bringSubviewToFront(imageView)
         
         
         NSLayoutConstraint.activate([
@@ -189,7 +187,7 @@ final class ProfileHeaderView: UIView {
         
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
             self.blackView.alpha = 0.8
-            self.image.layer.cornerRadius = 0
+            self.imageView.layer.cornerRadius = 0
             self.topImage.constant = 100
             self.leadingImage.constant = 0
             self.widthImage.constant = UIScreen.main.bounds.width
@@ -209,7 +207,7 @@ final class ProfileHeaderView: UIView {
             
         } completion: { _ in
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-                self.image.layer.cornerRadius = 50
+                self.imageView.layer.cornerRadius = 50
                 self.topImage.constant = 0
                 self.leadingImage.constant = 16
                 self.widthImage.constant = 100
