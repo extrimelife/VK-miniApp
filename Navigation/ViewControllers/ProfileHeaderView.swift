@@ -96,6 +96,13 @@ final class ProfileHeaderView: UIView {
         return button
     }()
     
+    // Присваиваю констрейнты к переменным чтобы констрейнты использовать для анимации
+    private var topImage = NSLayoutConstraint()
+    private var leadingImage = NSLayoutConstraint()
+    private var widthImage = NSLayoutConstraint()
+    private var heightImage = NSLayoutConstraint()
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -125,15 +132,7 @@ final class ProfileHeaderView: UIView {
         
     }
     
-    // Присваиваю констрейнты к переменным чтобы констрейнты использовать для анимации
-    private var topImage = NSLayoutConstraint()
-    private var leadingImage = NSLayoutConstraint()
-    private var widthImage = NSLayoutConstraint()
-    private var heightImage = NSLayoutConstraint()
-    
-    
     private func setupLayout() {
-        
         [image, label, text, setupButton, textField].forEach { self.addSubview($0) }
         
         // Задаю отдельно констрейнты для UiImage чтобы сделать анимацию ниже
@@ -144,30 +143,24 @@ final class ProfileHeaderView: UIView {
         
         
         NSLayoutConstraint.activate([
-            
-            // constraint imageView
             topImage, leadingImage, widthImage, heightImage,
             
-            //constrain UIlabel
             label.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
             label.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 130),
             label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             label.heightAnchor.constraint(equalToConstant: 30),
             
-            //constrain UItext
             text.topAnchor.constraint(equalTo: label.bottomAnchor),
             text.leadingAnchor.constraint(equalTo: label.leadingAnchor),
             text.trailingAnchor.constraint(equalTo: label.trailingAnchor),
             text.heightAnchor.constraint(equalToConstant: 40),
             
-            //constrain UIbutton
             setupButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16),
             setupButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             setupButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             setupButton.heightAnchor.constraint(equalToConstant: 50),
             setupButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            //constrain UItextfield
             textField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 27),
             textField.leadingAnchor.constraint(equalTo: label.leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: label.trailingAnchor),
