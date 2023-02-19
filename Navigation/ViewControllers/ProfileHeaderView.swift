@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+final class ProfileHeaderView: UIView {
+    
+// MARK: - Private properties
     
     private var statusText: String?
     
@@ -20,16 +22,15 @@ class ProfileHeaderView: UIView {
         return viewBlack
     }()
     
-    private lazy var buttonBlackView: UIButton = {
-        let buttonView = UIButton()
-        buttonView.translatesAutoresizingMaskIntoConstraints = false
-        buttonView.setImage(UIImage(systemName: "xmark"), for: .normal)
-        buttonView.tintColor = .systemGray4
-        buttonView.alpha = 0
-        buttonView.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
-        return buttonView
+    private lazy var crossButton: UIButton = {
+        let crossButton = UIButton()
+        crossButton.translatesAutoresizingMaskIntoConstraints = false
+        crossButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        crossButton.tintColor = .systemGray4
+        crossButton.alpha = 0
+        crossButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+        return crossButton
     }()
-    
     
     private let image: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "square"))
@@ -99,13 +100,11 @@ class ProfileHeaderView: UIView {
         super.init(frame: frame)
         setupLayout()
         setupGesture()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     // Внедряю проверку на пустой textField при установке статуса!
     @objc private func tapAction() {
@@ -117,8 +116,7 @@ class ProfileHeaderView: UIView {
             textField.attributedPlaceholder = NSAttributedString(string: "Set your status...",
                                                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
             text.text = statusText
-           // print(text.text ?? "")
-            
+            print(text.text ?? "")
         }
     }
     
@@ -185,15 +183,15 @@ class ProfileHeaderView: UIView {
     
     @objc private func actionTap() {
         addSubview(blackView)
-        addSubview(buttonBlackView)
+        addSubview(crossButton)
         bringSubviewToFront(image)
         
         
         NSLayoutConstraint.activate([
-            buttonBlackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            buttonBlackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-            buttonBlackView.widthAnchor.constraint(equalToConstant: 30),
-            buttonBlackView.heightAnchor.constraint(equalToConstant: 30)
+            crossButton.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            crossButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            crossButton.widthAnchor.constraint(equalToConstant: 30),
+            crossButton.heightAnchor.constraint(equalToConstant: 30)
         ])
         
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
@@ -207,14 +205,14 @@ class ProfileHeaderView: UIView {
             
         } completion: { _ in
             UIView.animate(withDuration: 0.3) {
-                self.buttonBlackView.alpha = 1
+                self.crossButton.alpha = 1
             }
         }
     }
     
     @objc private func cancelAction() {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
-            self.buttonBlackView.alpha = 0
+            self.crossButton.alpha = 0
             
         } completion: { _ in
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
@@ -227,7 +225,6 @@ class ProfileHeaderView: UIView {
                 self.layoutIfNeeded()
             }
         }
-        
     }
 }
 
