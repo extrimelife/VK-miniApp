@@ -7,9 +7,21 @@
 
 import UIKit
 
-class GalleryViewController: UIViewController {
+final class GalleryViewController: UIViewController {
     
-    var imageModel = ImageModel.makeImage()
+    // MARK: - Private Properties
+    
+    private let imageModel = ImageModel.makeImage()
+    
+    private lazy var galleryCollection: UICollectionView = {
+        let layoutForCollection = UICollectionViewFlowLayout()
+        let collectionGallery = UICollectionView(frame: .zero, collectionViewLayout: layoutForCollection )
+        collectionGallery.translatesAutoresizingMaskIntoConstraints = false
+        collectionGallery.dataSource = self
+        collectionGallery.delegate = self
+        collectionGallery.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier)
+        return collectionGallery
+    }()
     
     // Создаю черную вью для заднего фона при открытии фото на весь экран
     private let blackView: UIView = {
@@ -25,11 +37,11 @@ class GalleryViewController: UIViewController {
     // Создаю кнопку крестик для выхода из полноэкранного режима
     private lazy var buttonCancelAnimation: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.addTarget(self, action: #selector(cancelAnimationButton), for: .touchUpInside)
-        button.tintColor = .systemGray4
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.isUserInteractionEnabled = true
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = .systemGray4
+        button.alpha = 0
+        button.addTarget(self, action: #selector(cancelAnimationButton), for: .touchUpInside)
         return button
     }()
     
@@ -44,72 +56,56 @@ class GalleryViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var galleryCollection: UICollectionView = {
-        let layoutForCollection = UICollectionViewFlowLayout()
-        let collectionGallery = UICollectionView(frame: .zero, collectionViewLayout: layoutForCollection )
-        collectionGallery.translatesAutoresizingMaskIntoConstraints = false
-        collectionGallery.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier)
-        collectionGallery.dataSource = self
-        collectionGallery.delegate = self
-        return collectionGallery
-    }()
+    // MARK: - Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // устанавливаю title в галерее с фото
-        self.navigationItem.title = "Галерея"
         setup()
     }
     
+    // MARK: - Private Methods
     
     private func setup() {
+        navigationItem.title = "Галерея"
         [galleryCollection, blackView, fullImageView, buttonCancelAnimation].forEach({ view.addSubview($0) })
-        
-        
         NSLayoutConstraint.activate([
             
-            // Констрейнты для collectionView в галереи с фотографиями
             galleryCollection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             galleryCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             galleryCollection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             galleryCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            // Констрейнты для полноразмерных фотографий из галереи
             fullImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             fullImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             fullImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
             fullImageView.heightAnchor.constraint(equalTo: fullImageView.widthAnchor, multiplier: 1),
             
-            // Констрейнты для кнопки крестика
             buttonCancelAnimation.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             buttonCancelAnimation.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 8),
             buttonCancelAnimation.widthAnchor.constraint(equalToConstant: 40),
             buttonCancelAnimation.heightAnchor.constraint(equalTo: buttonCancelAnimation.widthAnchor, multiplier: 1)
-            
-            
         ])
     }
 }
 
 // MARK: - UICollectionViewDataSource
+
 extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as! PhotosCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as? PhotosCollectionViewCell else { return PhotosCollectionViewCell() }
         let imageModel = imageModel[indexPath.item]
         cell.setupImageModel(imageModel)
         cell.buttonAllPhotoCellDelegate = self
         return cell
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
+
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     var sideInset: CGFloat { return 8 }
     
@@ -131,10 +127,10 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return sideInset
     }
-    
 }
 
-// Реализовываю протокол PhotoCellDelegate
+// MARK: - PhotoCellDelegate
+
 extension GalleryViewController: PhotoCellDelegate {
     func tapAction(photo: UIImage) {
         self.fullImageView.image = photo

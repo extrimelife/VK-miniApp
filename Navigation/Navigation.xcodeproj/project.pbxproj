@@ -75,6 +75,7 @@
 				B74DC7A528269C4700AE56AC /* PhotosCollectionViewCell.swift */,
 				B7540D2A2825A7B8000A5D0D /* PhotosTableViewCell.swift */,
 				B74DC7A128264D7A00AE56AC /* CollectionViewCellForTableView.swift */,
+				B7227D5E28214CD200B8AB63 /* PostTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -82,7 +83,6 @@
 		B7540D2528258391000A5D0D /* ProfilePostPage */ = {
 			isa = PBXGroup;
 			children = (
-				B7227D5E28214CD200B8AB63 /* PostTableViewCell.swift */,
 				B7461B0C2833FB870052D6F4 /* ShowPostViewController.swift */,
 				B7227D60282158D600B8AB63 /* UiView + Extension.swift */,
 				B7E84D91282012D600CDF66B /* HexUiColor.swift */,
@@ -97,7 +97,7 @@
 				B74DC7A72826B35800AE56AC /* Views */,
 				B7540D2528258391000A5D0D /* ProfilePostPage */,
 				B775F118282000FB00648D35 /* Navigation */,
-				B7ECC68429A1991200C27986 /* Model */,
+				B7ECC68429A1991200C27986 /* Models */,
 				B7ECC68329A1987300C27986 /* App */,
 				B775F117282000FB00648D35 /* Products */,
 			);
@@ -146,13 +146,13 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		B7ECC68429A1991200C27986 /* Model */ = {
+		B7ECC68429A1991200C27986 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				B7227D5C28211E8600B8AB63 /* PostModel.swift */,
 				B702CA9B2824641800EA1BF9 /* ImageModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
