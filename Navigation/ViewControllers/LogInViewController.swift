@@ -8,8 +8,8 @@
 import UIKit
 
 final class LogInViewController: UIViewController {
-  
-// MARK: Private properties
+    
+    // MARK: Private properties
     
     private let notificationCenter = NotificationCenter.default
     private let login = ""
@@ -18,7 +18,7 @@ final class LogInViewController: UIViewController {
     private let imageView: UIImageView = {
         let viewImage = UIImageView()
         viewImage.translatesAutoresizingMaskIntoConstraints = false
-        viewImage.image = .init(named: "logo")
+        viewImage.image = UIImage(named: "logo")
         return viewImage
     }()
     
@@ -45,36 +45,14 @@ final class LogInViewController: UIViewController {
         return labelAlert
     }()
     
-    private let logTextField: UITextField = {
-        let textFieldLog = UITextField()
-        textFieldLog.translatesAutoresizingMaskIntoConstraints = false
-        textFieldLog.layer.borderColor = UIColor.lightGray.cgColor
-        textFieldLog.layer.borderWidth = 0.5
-        textFieldLog.placeholder = "Email of phone"
-        textFieldLog.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: textFieldLog.frame.height))
-        textFieldLog.leftViewMode = .always
-        textFieldLog.textColor = .black
-        textFieldLog.font = .systemFont(ofSize: 16)
-        textFieldLog.tintColor = .lightGray
-        textFieldLog.clearButtonMode = .whileEditing
-        return textFieldLog
+    private lazy var logTextField: UITextField = {
+       setupTextField(playceholder: "Email of phone")
     }()
     
-    
-    private let pasTextField: UITextField = {
-        let textFieldPas = UITextField()
-        textFieldPas.translatesAutoresizingMaskIntoConstraints = false
-        textFieldPas.layer.borderColor = UIColor.lightGray.cgColor
-        textFieldPas.layer.borderWidth = 0.5
-        textFieldPas.placeholder = "Password"
-        textFieldPas.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: textFieldPas.frame.height))
-        textFieldPas.leftViewMode = .always
-        textFieldPas.textColor = .black
-        textFieldPas.font = .systemFont(ofSize: 16)
-        textFieldPas.tintColor = .lightGray
+    private lazy var pasTextField: UITextField = {
+        let textFieldPas = setupTextField(playceholder: "Password")
         textFieldPas.autocapitalizationType = .none
         textFieldPas.isSecureTextEntry = true
-        textFieldPas.clearButtonMode = .whileEditing
         return textFieldPas
     }()
     
@@ -103,8 +81,8 @@ final class LogInViewController: UIViewController {
         contentView.backgroundColor = .white
         return contentView
     }()
- 
-// MARK: - Override Methods
+    
+    // MARK: - Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,9 +106,9 @@ final class LogInViewController: UIViewController {
         notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-// MARK: - Private Functions
+    // MARK: - Private Functions
     
-   private func isValidEmail(_ email: String) -> Bool {
+    private func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
@@ -160,8 +138,7 @@ final class LogInViewController: UIViewController {
             logTextField.text = ""
             logTextField.attributedPlaceholder = NSAttributedString(string: "Email is incorrect",
                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-            }
-        
+        }
         // Проверка на определенное количество вводимых символов пароля
         if pasTextField.text!.count < 8 && pasTextField.text != "" {
             alertLabel.text = alertLabel.text
@@ -169,9 +146,7 @@ final class LogInViewController: UIViewController {
             
         } else {
             alertLabel.isHidden = true
-            
         }
-        
         
         if logTextField.text == login && pasTextField.text == password {
             let profileVC = ProfileViewController()
@@ -263,10 +238,26 @@ extension LogInViewController: UITextFieldDelegate {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
 }
 
-
+extension LogInViewController {
+    private func setupTextField(playceholder: String) -> UITextField {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderWidth = 0.5
+        textField.placeholder = playceholder
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: textField.frame.height))
+        textField.leftViewMode = .always
+        textField.textColor = .black
+        textField.font = .systemFont(ofSize: 16)
+        textField.tintColor = .lightGray
+        textField.autocapitalizationType = .none
+        textField.isSecureTextEntry = true
+        textField.clearButtonMode = .whileEditing
+        return textField
+    }
+}
 
 
 
