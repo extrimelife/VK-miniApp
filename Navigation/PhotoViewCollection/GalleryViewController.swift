@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhotosViewController: UIViewController {
+class GalleryViewController: UIViewController {
     
     var imageModel = ImageModel.makeImage()
     
@@ -93,14 +93,15 @@ class PhotosViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDataSource
-extension PhotosViewController: UICollectionViewDataSource {
+extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as! PhotosCollectionViewCell
-        cell.setupImageModel(imageModel[indexPath.item])
+        let imageModel = imageModel[indexPath.item]
+        cell.setupImageModel(imageModel)
         cell.buttonAllPhotoCellDelegate = self
         return cell
     }
@@ -109,7 +110,7 @@ extension PhotosViewController: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension PhotosViewController: UICollectionViewDelegateFlowLayout {
+extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     var sideInset: CGFloat { return 8 }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -134,7 +135,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // Реализовываю протокол PhotoCellDelegate
-extension PhotosViewController: PhotoCellDelegate {
+extension GalleryViewController: PhotoCellDelegate {
     func tapAction(photo: UIImage) {
         self.fullImageView.image = photo
         self.fullImageView.isUserInteractionEnabled = true

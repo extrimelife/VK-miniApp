@@ -29,7 +29,7 @@ class ProfileViewController: UIViewController {
         // Устанавливаю title в профиле
         navigationItem.title = "Профиль"
         navigationController?.navigationBar.isHidden = false
-        self.view.backgroundColor = .systemGray6
+        view.backgroundColor = .systemGray6
         setupLayout()
         hideKeyboardTappedAround()
         
@@ -50,6 +50,28 @@ class ProfileViewController: UIViewController {
 // MARK: UITableViewDataSourse
 extension ProfileViewController: UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        section == 0 ? postModel.count : imageModel.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as? PhotosTableViewCell else { return PhotosTableViewCell() }
+            cell.setupLabel()
+            //Вызов кнопки с переходом в галерею
+            cell.delegate = self
+            cell.selectionStyle = .none
+            return cell
+        }
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell else { return PostTableViewCell() }
+        let postModel = postModel[indexPath.row]
+        cell.setupCell(postModel)
+        cell.tapPostImageDelegate = self
+        cell.selectionStyle = .none
+        return cell
+    }
+    
     // удаление по свайпу
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete  {
@@ -61,27 +83,6 @@ extension ProfileViewController: UITableViewDataSource {
                 
             }
         }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postModel.count + 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.item != 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-            cell.tapPostImageDelegate = self
-            cell.setupCell(postModel[indexPath.item - 1])
-            cell.selectionStyle = .none
-            return cell
-        }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
-        cell.setupLabel("Photos")
-        //Вызов кнопки с переходом в галерею
-        cell.delegate = self
-        cell.selectionStyle = .none
-        return cell
     }
     
 }
@@ -109,7 +110,7 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController: PhotosTableViewCellDelegate {
     func buttonTap() {
-        let photosViewController = PhotosViewController()
+        let photosViewController = GalleryViewController()
         navigationController?.pushViewController(photosViewController, animated: true)
     }
     

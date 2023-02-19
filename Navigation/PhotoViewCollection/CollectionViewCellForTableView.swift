@@ -7,13 +7,13 @@
 
 import UIKit
 
-class PhotosCollectionViewCellForTableView: UICollectionViewCell {
+class CollectionViewCellForTableView: UICollectionViewCell {
     
     private let imagePhoto: UIImageView = {
         let imagePhoto = UIImageView()
         imagePhoto.translatesAutoresizingMaskIntoConstraints = false
         imagePhoto.contentMode = .scaleAspectFill
-        imagePhoto.layer.cornerRadius = 6
+        imagePhoto.layer.cornerRadius = 10
         imagePhoto.clipsToBounds = true 
         return imagePhoto
     }()

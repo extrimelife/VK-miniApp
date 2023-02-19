@@ -17,7 +17,7 @@ class PostTableViewCell: UITableViewCell {
     
     weak var tapPostImageDelegate: TapPostImageDelegate?
     
-    private var modelPost = ModelPost(author: "", description: "", image: "путешественник", likes: 1, views: 1)
+    private var modelPost = ModelPost(author: "", description: "", image: "", likes: 1, views: 1)
     
     private let whiteView: UIView = {
         let viewWhite = UIView()
@@ -97,8 +97,7 @@ class PostTableViewCell: UITableViewCell {
                        initialSpringVelocity: 0.0,
                        options: .curveEaseInOut) {
             
-            self.modelPost.views += 1
-            
+            self.modelPost.views += 1            
             self.viewLabel.text = "Views \(self.modelPost.views)"
             self.tapPostImageDelegate?.postImagePress(author: self.modelPost.author, description: self.modelPost.description, image: self.modelPost.image)
         }
