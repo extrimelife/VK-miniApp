@@ -19,7 +19,7 @@ final class GalleryViewController: UIViewController {
         collectionGallery.translatesAutoresizingMaskIntoConstraints = false
         collectionGallery.dataSource = self
         collectionGallery.delegate = self
-        collectionGallery.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier)
+        collectionGallery.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.identifier)
         return collectionGallery
     }()
     
@@ -96,7 +96,7 @@ extension GalleryViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as? PhotosCollectionViewCell else { return PhotosCollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GalleryCollectionViewCell.identifier, for: indexPath) as? GalleryCollectionViewCell else { return GalleryCollectionViewCell() }
         let imageModel = imageModel[indexPath.item]
         cell.setupImageModel(imageModel)
         cell.buttonAllPhotoCellDelegate = self
