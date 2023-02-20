@@ -20,7 +20,7 @@
 		B775F11A282000FB00648D35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775F119282000FB00648D35 /* AppDelegate.swift */; };
 		B775F123282000FC00648D35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B775F122282000FC00648D35 /* Assets.xcassets */; };
 		B775F126282000FC00648D35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B775F124282000FC00648D35 /* LaunchScreen.storyboard */; };
-		B775F12E282002A200648D35 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775F12D282002A200648D35 /* FeedViewController.swift */; };
+		B775F12E282002A200648D35 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775F12D282002A200648D35 /* MainViewController.swift */; };
 		B775F130282002B300648D35 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775F12F282002B300648D35 /* ProfileViewController.swift */; };
 		B775F1322820033300648D35 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775F1312820033300648D35 /* TabBarViewController.swift */; };
 		B775F1342820042200648D35 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775F1332820042200648D35 /* PostViewController.swift */; };
@@ -47,7 +47,7 @@
 		B775F122282000FC00648D35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B775F125282000FC00648D35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B775F127282000FC00648D35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B775F12D282002A200648D35 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		B775F12D282002A200648D35 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B775F12F282002B300648D35 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B775F1312820033300648D35 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B775F1332820042200648D35 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -93,10 +93,10 @@
 		B775F10D282000FB00648D35 = {
 			isa = PBXGroup;
 			children = (
+				B775F118282000FB00648D35 /* NavigationControllers */,
 				B775F1392820070300648D35 /* ViewControllers */,
 				B74DC7A72826B35800AE56AC /* Views */,
 				B7540D2528258391000A5D0D /* ProfilePostPage */,
-				B775F118282000FB00648D35 /* Navigation */,
 				B7ECC68429A1991200C27986 /* Models */,
 				B7ECC68329A1987300C27986 /* App */,
 				B775F117282000FB00648D35 /* Products */,
@@ -111,16 +111,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B775F118282000FB00648D35 /* Navigation */ = {
+		B775F118282000FB00648D35 /* NavigationControllers */ = {
 			isa = PBXGroup;
 			children = (
-				B775F1352820046000648D35 /* Post.swift */,
-				B775F12D282002A200648D35 /* FeedViewController.swift */,
+				B775F12D282002A200648D35 /* MainViewController.swift */,
 				B775F1312820033300648D35 /* TabBarViewController.swift */,
 				B775F1332820042200648D35 /* PostViewController.swift */,
 				B775F137282004BA00648D35 /* InfoViewController.swift */,
 			);
-			path = Navigation;
+			path = NavigationControllers;
 			sourceTree = "<group>";
 		};
 		B775F1392820070300648D35 /* ViewControllers */ = {
@@ -151,6 +150,7 @@
 			children = (
 				B7227D5C28211E8600B8AB63 /* PostModel.swift */,
 				B702CA9B2824641800EA1BF9 /* ImageModel.swift */,
+				B775F1352820046000648D35 /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -233,7 +233,7 @@
 				B7E84D92282012D600CDF66B /* HexUiColor.swift in Sources */,
 				B775F130282002B300648D35 /* ProfileViewController.swift in Sources */,
 				B7E84D902820121400CDF66B /* LogInViewController.swift in Sources */,
-				B775F12E282002A200648D35 /* FeedViewController.swift in Sources */,
+				B775F12E282002A200648D35 /* MainViewController.swift in Sources */,
 				B775F138282004BA00648D35 /* InfoViewController.swift in Sources */,
 				B775F1362820046000648D35 /* Post.swift in Sources */,
 				B74DC7A628269C4700AE56AC /* PhotosCollectionViewCell.swift in Sources */,
