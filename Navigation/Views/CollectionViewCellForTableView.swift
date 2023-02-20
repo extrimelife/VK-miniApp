@@ -7,35 +7,41 @@
 
 import UIKit
 
-class CollectionViewCellForTableView: UICollectionViewCell {
+final class CollectionViewCellForTableView: UICollectionViewCell {
+    
+    // MARK: - Private Properties
     
     private let imagePhoto: UIImageView = {
         let imagePhoto = UIImageView()
         imagePhoto.translatesAutoresizingMaskIntoConstraints = false
         imagePhoto.contentMode = .scaleAspectFill
         imagePhoto.layer.cornerRadius = 10
-        imagePhoto.clipsToBounds = true 
+        imagePhoto.clipsToBounds = true
         return imagePhoto
     }()
     
+    // MARK: - Override Methods
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageLayout()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public Methods
     // Функция отвечает за показ фото
     func setupImageModel(_ image: ImageModel) {
         imagePhoto.image = UIImage(named: image.image)
     }
     
-    private func imageLayout() {
+    // MARK: - Private Methods
+    
+    private func setupLayout() {
         contentView.addSubview(imagePhoto)
         
-        // Констрейнт для imageView на TableView для CollectionView
         NSLayoutConstraint.activate([
             imagePhoto.topAnchor.constraint(equalTo: contentView.topAnchor),
             imagePhoto.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -43,6 +49,4 @@ class CollectionViewCellForTableView: UICollectionViewCell {
             imagePhoto.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
-    
-    
 }

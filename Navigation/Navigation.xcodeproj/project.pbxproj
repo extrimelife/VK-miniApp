@@ -73,8 +73,8 @@
 			isa = PBXGroup;
 			children = (
 				B74DC7A528269C4700AE56AC /* GalleryCollectionViewCell.swift */,
-				B7540D2A2825A7B8000A5D0D /* PhotosTableViewCell.swift */,
 				B74DC7A128264D7A00AE56AC /* CollectionViewCellForTableView.swift */,
+				B7540D2A2825A7B8000A5D0D /* PhotosTableViewCell.swift */,
 				B7227D5E28214CD200B8AB63 /* PostTableViewCell.swift */,
 			);
 			path = Views;
