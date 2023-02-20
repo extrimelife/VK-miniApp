@@ -7,17 +7,22 @@
 
 import UIKit
 
-class PostViewController: UIViewController {
+final class PostViewController: UIViewController {
+
+// MARK: - Private Properties
     
-    var post: Post?
+   private var post: Post?
+
+// MARK: - Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupController()
         makeBarItem()
         view.backgroundColor = .cyan
-        
     }
+    
+// MARK: - Private Methods
     
     private func setupController() {
         if let post = post {
@@ -32,7 +37,7 @@ class PostViewController: UIViewController {
         navigationItem.rightBarButtonItem = barItem
     }
     
-    @objc private func tapAction () {
+    @objc private func tapAction() {
         let infoVc = InfoViewController()
         present(infoVc, animated: true)
     }
