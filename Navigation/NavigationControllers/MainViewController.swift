@@ -9,7 +9,7 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
-// MARK: - Private Properties
+    // MARK: - Private Properties
     
     private let stackView: UIStackView = {
         let viewStack = UIStackView()
@@ -32,14 +32,14 @@ final class MainViewController: UIViewController {
         return secondButton
     }()
     
-// MARK: - Override Methods
+    // MARK: - Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
     }
-
-// MARK: - Private Methods
+    
+    // MARK: - Private Methods
     
     @objc private func buttonPressed() {
         let postViewController = PostViewController()

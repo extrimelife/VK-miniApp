@@ -7,30 +7,35 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController {
+final class TabBarViewController: UITabBarController {
     
-    let logInViewController = LogInViewController()
-    let feedViewController = MainViewController()
-    let profileViewController = ProfileViewController()
+    // MARK: - Private Properties
+    
+    private let logInViewController = LogInViewController()
+    private let mainViewController = MainViewController()
+    private let profileViewController = ProfileViewController()
+    
+    // MARK: - Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpController()
+        setupController()
         setupNavigationController()
-        
     }
     
-    private func setUpController() {
-        let feedController = UINavigationController(rootViewController: feedViewController)
-        feedViewController.tabBarItem.title = "Лента"
-        feedViewController.tabBarItem.image = UIImage(systemName: "play.circle")
-        feedViewController.navigationItem.title = "Main"
+    // MARK: - Private Methods
+    
+    private func setupController() {
+        let mainController = UINavigationController(rootViewController: mainViewController)
+        mainController.tabBarItem.title = "Лента"
+        mainController.tabBarItem.image = UIImage(systemName: "play.circle")
+        mainController.navigationItem.title = "Main"
         
         let profileController = UINavigationController(rootViewController: logInViewController)
         logInViewController.tabBarItem.title = "Профиль"
         logInViewController.tabBarItem.image = UIImage(systemName: "person.crop.circle")
         
-        viewControllers = [feedController, profileController]
+        viewControllers = [mainController, profileController]
     }
     
     private func setupNavigationController() {
@@ -39,7 +44,5 @@ class TabBarViewController: UITabBarController {
         self.navigationController?.navigationBar.standardAppearance =  navigationBar
         self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBar
         view.backgroundColor = .white
-        
     }
-    
 }
