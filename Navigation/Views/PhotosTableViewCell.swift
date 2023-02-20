@@ -7,14 +7,21 @@
 
 import UIKit
 
+// MARK: - Protocol PhotosTableViewCellDelegate
+
 protocol PhotosTableViewCellDelegate: AnyObject {
     func buttonTap()
 }
 
-class PhotosTableViewCell: UITableViewCell {
+final class PhotosTableViewCell: UITableViewCell {
+    
+    // MARK: - Public Properties
     
     weak var delegate: PhotosTableViewCellDelegate?
-    let imageModel = ImageModel.makeImage()
+    
+    // MARK: - Private Properties
+    
+    private let imageModel = ImageModel.makeImage()
     
     // Создаю TableViewCollection для фото на странице TableView в профиле
     private lazy var collectionView: UICollectionView = {
@@ -47,6 +54,8 @@ class PhotosTableViewCell: UITableViewCell {
         return button
     }()
     
+    // MARK: - Override Methods
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
@@ -56,41 +65,34 @@ class PhotosTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public Methods
+    
+    func setupLabel() {
+        labelText.text = "Photos"
+    }
+    
+    // MARK: - Private Methods
     
     @objc private func goToGallery() {
         delegate?.buttonTap()
     }
     
-    
-    // Функция для оторажения лэйбла в нашей ячейке в profileViewController для функции cellForRowAt!!!
-    func setupLabel() {
-        labelText.text = "Photos"
-    }
-    
-    
     private func setupLayout() {
         [collectionView, labelText, button] .forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            
-            
-            // Констрейнт для collectionView
             collectionView.topAnchor.constraint(equalTo: labelText.bottomAnchor, constant: 12),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12 - 8),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12 + 8),
             collectionView.heightAnchor.constraint(equalToConstant: 100),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             
-            // Констрейнт для лэйбла с надписью Photos
             labelText.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             labelText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             
-            // Констрейнт для кнопки
             button.centerYAnchor.constraint(equalTo: labelText.centerYAnchor),
             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12)
-            
         ])
-        
     }
 }
 
@@ -106,10 +108,10 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
         cell.setupImageModel(imageModel)
         return cell
     }
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
+
 extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     var sideInset: CGFloat { return 8 }
     
