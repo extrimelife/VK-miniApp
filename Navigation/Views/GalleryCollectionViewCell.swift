@@ -7,14 +7,20 @@
 
 import UIKit
 
+// MARK: - Protocol PhotoCellDelegate
+
 protocol PhotoCellDelegate: AnyObject {
     func tapAction(photo: UIImage)
     func cancelAnimationButton()
 }
 
-class PhotosCollectionViewCell: UICollectionViewCell {
+final class GalleryCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Public Properties
     
     weak var buttonAllPhotoCellDelegate: PhotoCellDelegate?
+    
+    // MARK: - Private Properties
     
     private let imageForGallery: UIImageView = {
         let galleryImage = UIImageView()
@@ -24,9 +30,11 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         return galleryImage
     }()
     
+    // MARK: - Override Methods
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageLayout()
+        setupLayout()
         setupGestures()
     }
     
@@ -34,25 +42,26 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupGestures() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoAction))
-        imageForGallery.isUserInteractionEnabled = true 
-        imageForGallery.addGestureRecognizer(tapGesture)
-    }
-
-    @objc private func photoAction() {
-        buttonAllPhotoCellDelegate?.tapAction(photo: imageForGallery.image!)
-    }
-    
+    // MARK: - Public Methods
     // Функция отвечает за показ фото
     func setupImageModel(_ image: ImageModel) {
         imageForGallery.image = UIImage(named: image.image)
     }
     
-    private func imageLayout() {
+    // MARK: - Private Methods
+    
+    private func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoAction))
+        imageForGallery.isUserInteractionEnabled = true
+        imageForGallery.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func photoAction() {
+        buttonAllPhotoCellDelegate?.tapAction(photo: imageForGallery.image!)
+    }
+    
+    private func setupLayout() {
         contentView.addSubview(imageForGallery)
-        
-        // Констрейнт для imageView на для CollectionView
         NSLayoutConstraint.activate([
             imageForGallery.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageForGallery.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -60,8 +69,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
             imageForGallery.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
-    
-    
 }
 
 
