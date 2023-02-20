@@ -7,13 +7,17 @@
 
 import UIKit
 
-class InfoViewController: UIViewController {
+final class InfoViewController: UIViewController {
+    
+    // MARK: - Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         makeButton()
         view.backgroundColor = .red
     }
+    
+    // MARK: - Private Methods
     
     private func makeButton() {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
