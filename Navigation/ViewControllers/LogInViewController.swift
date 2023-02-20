@@ -46,7 +46,7 @@ final class LogInViewController: UIViewController {
     }()
     
     private lazy var logTextField: UITextField = {
-       setupTextField(playceholder: "Email of phone")
+        setupTextField(playceholder: "Email of phone")
     }()
     
     private lazy var pasTextField: UITextField = {

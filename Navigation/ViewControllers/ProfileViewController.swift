@@ -9,7 +9,7 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-// MARK: - Private Properties
+    // MARK: - Private Properties
     
     private let imageModel = ImageModel.makeImage()
     private var postModel = ModelPost.makePost()
@@ -25,7 +25,7 @@ final class ProfileViewController: UIViewController {
         return tableView
     }()
     
- // MARK: - Override Functions
+    // MARK: - Override Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +101,7 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-         UITableView.automaticDimension
+        UITableView.automaticDimension
     }
 }
 

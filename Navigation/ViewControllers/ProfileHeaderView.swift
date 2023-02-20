@@ -9,7 +9,7 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
     
-// MARK: - Private properties
+    // MARK: - Private properties
     
     private var statusText: String?
     

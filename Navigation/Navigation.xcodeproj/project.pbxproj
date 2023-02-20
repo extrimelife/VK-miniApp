@@ -80,14 +80,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		B7540D2528258391000A5D0D /* ProfilePostPage */ = {
+		B7540D2528258391000A5D0D /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
-				B7461B0C2833FB870052D6F4 /* ShowPostViewController.swift */,
 				B7227D60282158D600B8AB63 /* UiView + Extension.swift */,
 				B7E84D91282012D600CDF66B /* HexUiColor.swift */,
 			);
-			path = ProfilePostPage;
+			path = Extentions;
 			sourceTree = "<group>";
 		};
 		B775F10D282000FB00648D35 = {
@@ -96,7 +95,7 @@
 				B775F118282000FB00648D35 /* NavigationControllers */,
 				B775F1392820070300648D35 /* ViewControllers */,
 				B74DC7A72826B35800AE56AC /* Views */,
-				B7540D2528258391000A5D0D /* ProfilePostPage */,
+				B7540D2528258391000A5D0D /* Extentions */,
 				B7ECC68429A1991200C27986 /* Models */,
 				B7ECC68329A1987300C27986 /* App */,
 				B775F117282000FB00648D35 /* Products */,
@@ -115,9 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				B775F12D282002A200648D35 /* MainViewController.swift */,
-				B775F1312820033300648D35 /* TabBarViewController.swift */,
 				B775F1332820042200648D35 /* PostViewController.swift */,
 				B775F137282004BA00648D35 /* InfoViewController.swift */,
+				B775F1312820033300648D35 /* TabBarViewController.swift */,
 			);
 			path = NavigationControllers;
 			sourceTree = "<group>";
@@ -129,6 +128,7 @@
 				B775F13A2820076C00648D35 /* ProfileHeaderView.swift */,
 				B775F12F282002B300648D35 /* ProfileViewController.swift */,
 				B74DC7A3282698B600AE56AC /* GalleryViewController.swift */,
+				B7461B0C2833FB870052D6F4 /* ShowPostViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
